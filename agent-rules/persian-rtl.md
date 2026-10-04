@@ -1,52 +1,59 @@
 # Persian RTL & BiDi Best Practices for AI Agents
 
-This rule ensures that Persian (Farsi) and Arabic texts rendered in Google Antigravity IDE and VS Code chat webviews do not suffer from punctuation flipping, broken parentheses, or LTR mixed-direction scrambling.
+این فایل راهنمای استایل و دستورالعمل قطعی برای تولید متن‌های فارسی و عربی در محیط هوش مصنوعی Google Antigravity IDE است تا از پرش علائم نگارشی، برعکس شدن پرانتزها و بی‌نظمی متن‌های ترکیبی انگلیسی و فارسی جلوگیری شود.
 
 ---
 
-## 1. Primary Rules for Responses
+## ۱. قوانین اصلی نگارش فارسی
 
-Whenever answering in Persian (Farsi):
+هنگام پاسخ‌دهی به زبان فارسی، همیشه موارد زیر را رعایت کنید:
 
-### A. Numbering and Lists
-- **Always use Persian/Arabic digits** (`۱.`, `۲.`, `۳.`) instead of Latin digits (`1.`, `2.`, `3.`) when writing numbered lists.
-  - ❌ Incorrect: `1. بررسی ایده اصلی` (Treated by browser as LTR start marker, flipping the line).
-  - ✅ Correct: `۱. بررسی ایده اصلی`
-- Keep bullet points (`*` or `-`) followed immediately by a space and Persian characters.
+### الف) شماره‌گذاری لیست‌ها
+- **همیشه از ارقام فارسی** (`۱.`, `۲.`, `۳.`) استفاده کنید، نه ارقام انگلیسی (`1.`, `2.`, `3.`).
+  - ❌ نادرست: `1. بررسی ایده اصلی` (مرورگر سطر را به صورت LTR آغاز کرده و پرانتزها و نقطه‌ها را برعکس می‌کند).
+  - ✅ درست: `۱. بررسی ایده اصلی`
+- در لیست‌های بدون شماره (Bullet points)، بعد از علامت `-` یا `*` بلافاصله کاراکتر فارسی قرار دهید.
 
-### B. Placement of English Words & Code Terms
-- **Never start a sentence or bullet point with an English word, endpoint, or parenthesis.**
-  - ❌ Incorrect: `• (Introspection) لایه شناسایی محیط`
-  - ✅ Correct: `• **لایه شناسایی محیط** (Introspection):`
-- When mentioning methods, HTTP endpoints, or file paths, either:
-  1. Put them in an isolated code block or separate line:
-     ```
-     POST /prompt
-     ```
-  2. Or wrap them in backticks `` `endpoint` `` and keep them separated with spaces from Persian punctuation.
+### ب) جایگذاری کلمات انگلیسی و شناسه‌های کد
+- **هرگز سطر یا آیتم لیست را با کلمه انگلیسی، پرانتز یا مسیر فایل آغاز نکنید.**
+  - ❌ نادرست: `* (Introspection) لایه شناسایی محیط`
+  - ✅ درست: `* **لایه شناسایی محیط** (Introspection):`
+- مسیرهای اندپوینت، توابع و متغیرها را داخل بک‌تیک قرار دهید یا به خط مستقل منتقل کنید:
+  - ❌ نادرست: `با تابع find_max(numbers) بزرگ‌ترین عدد را برگردانید.`
+  - ✅ درست: `با استفاده از تابع `find_max(numbers)`، بزرگ‌ترین عدد موجود در لیست را برگردانید.`
 
-### C. Large Text Blocks & HTML RTL Container
-- Wrap major Persian sections in `<div dir="rtl">...</div>` to guarantee explicit right-to-left layout in environments lacking automated `dir="auto"`.
+### ج) استفاده از کانتینر راست‌چین صریح (HTML RTL Wrapper)
+- تمام بخش‌های متنی فارسی را درون تگ زیر قرار دهید:
+```html
+<div dir="rtl" style="text-align: right; direction: rtl; unicode-bidi: plaintext;">
 
-### D. Code Blocks, Diagrams, and Math
-- All code snippets (` ```python `, ` ```bash `), JSON objects, and Mermaid diagrams must remain in standard markdown blocks so they preserve natural LTR direction.
+متن، تیترها و توضیحات فارسی شما در اینجا...
 
----
-
-## Example Demonstration
-
-### ❌ What Causes Scrambling:
-```markdown
-1. (API) یک سرویس است که با POST /prompt کار میکند.
+</div>
 ```
 
-### ✅ Clean & Proper Formatting:
+### د) بلوک‌های کد و نمودارها
+- بلوک‌های کد سه کوتیشن (` ```python ` یا ` ```bash `) و نمودارهای Mermaid باید **خارج از تگ RTL** قرار گیرند تا جهت طبیعی چپ‌به‌راست خود را حفظ کنند.
+
+---
+
+## نمونه مقایسه
+
+### ❌ قالب‌بندی غلط (باعث به‌هم‌ریختگی BiDi می‌شود):
 ```markdown
-<div dir="rtl">
+1. (API) یک سرویس است که با POST /prompt کار میکند.
+* core/exceptions.py (0 بایت)
+```
+
+### ✅ قالب‌بندی استاندارد و بی‌نقص:
+```markdown
+<div dir="rtl" style="text-align: right; direction: rtl; unicode-bidi: plaintext;">
 
 ۱. **سرویس وب** (API):
 این سرویس از طریق اندپوینت زیر پردازش را آغاز می‌کند:
 `POST /prompt`
+
+* فایل `core/exceptions.py` (حجم: ۰ بایت): بدون محتوا رها شده است.
 
 </div>
 ```

@@ -1,6 +1,6 @@
 /**
  * Antigravity RTL - CSS Stylesheet for Google Antigravity IDE
- * Author: Antigravity Community
+ * Author: Farbod Jolani (heat-core)
  * License: MIT
  * Description: Fixes Bidirectional (BiDi) text rendering, punctuation flipping,
  *              and mixed English/Persian/Arabic alignment in Antigravity IDE.
@@ -54,69 +54,69 @@ div[data-testid*="chat"],
 [class*="rendered-markdown"] ol,
 .chat-message-content ul,
 .chat-message-content ol {
-  padding-right: 1.5rem !important;
-  padding-left: 0.5rem !important;
-  margin-right: 0 !important;
+  padding-right: 1.75rem;
+  padding-left: 0.5rem;
   direction: rtl;
   text-align: right;
 }
 
-/* ==========================================================================
-   Strict LTR Preservation for Code, Terminal, Pre, and Technical Elements
-   ========================================================================== */
-
-/* Code blocks, snippets, preformatted text must ALWAYS remain LTR */
-pre,
-pre code,
-code,
-.monaco-editor,
-.monaco-editor-preview,
-.terminal,
-.xterm,
-[class*="code-block"],
-[class*="codeblock"],
-[class*="monaco-tokenized-source"],
-svg,
-.mermaid {
-  direction: ltr !important;
-  text-align: left !important;
-  unicode-bidi: isolate !important;
-  font-family: var(--ag-code-font-family) !important;
-}
-
-/* Inline code tags inside Persian sentences: isolate direction */
-p code,
-li code,
-blockquote code {
-  direction: ltr !important;
-  display: inline-block;
-  unicode-bidi: embed !important;
-  padding: 0.15em 0.4em;
-  margin: 0 0.2em;
-  border-radius: 4px;
-  font-size: 0.9em;
-}
-
-/* Tables alignment: header and body cells support auto bidi */
-table {
+/* Fix table alignment in Persian */
+[class*="rendered-markdown"] table,
+.markdown-body table {
   direction: rtl;
-  margin: 1rem 0;
+  text-align: right;
+  margin: 12px 0;
   border-collapse: collapse;
 }
 
-th, td {
+[class*="rendered-markdown"] th,
+[class*="rendered-markdown"] td {
   text-align: right;
-  unicode-bidi: plaintext;
   padding: 8px 12px;
 }
 
-/* Tables containing code columns stay LTR */
-td pre, td code {
+/* ==========================================================================
+   Code Blocks & Preformatted Text (Must ALWAYS Remain LTR)
+   ========================================================================== */
+
+/* Fenced code blocks, inline code, terminal outputs, and Monaco diff editors */
+[class*="rendered-markdown"] pre,
+[class*="rendered-markdown"] code,
+.chat-message-content pre,
+.chat-message-content code,
+pre,
+code,
+kbd,
+samp,
+.monaco-editor,
+.monaco-diff-editor,
+.terminal-outer-container,
+.xterm,
+div.code-block,
+div[class*="code-"] {
   direction: ltr !important;
   text-align: left !important;
+  unicode-bidi: normal !important;
+  font-family: var(--ag-code-font-family) !important;
 }
 
-/* Links inside RTL paragraphs */
-a {
-  unicode-bidi: isolate;
+/* Inline code tags inside Persian sentences */
+p code,
+li code,
+td code {
+  display: inline-block;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  padding: 0.15em 0.4em;
+  margin: 0 0.2em;
+  font-size: 0.88em;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Mermaid diagrams must remain strictly LTR */
+.mermaid,
+div[class*="mermaid"] {
+  direction: ltr !important;
+  text-align: center !important;
 }

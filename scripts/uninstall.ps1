@@ -1,19 +1,21 @@
-# ==============================================================================
 # Antigravity RTL - Uninstaller
-# ==============================================================================
+Write-Host "Restoring Antigravity IDE backup stylesheets..." -ForegroundColor Cyan
 
-[CmdletBinding()]
-param (
-    [string]$TargetWorkspace = "."
+$AppData = $env:LOCALAPPDATA
+$IdeDir = Join-Path $AppData "Programs\Antigravity IDE\resources\app\out"
+
+$CssTargets = @(
+    (Join-Path $IdeDir "jetskiAgent\main.css"),
+    (Join-Path $IdeDir "jetskiMain.tailwind.css"),
+    (Join-Path $IdeDir "vs\workbench\workbench.desktop.main.css")
 )
 
-$ResolvedPath = Resolve-Path $TargetWorkspace
-Write-Host "[*] Removing Antigravity RTL configurations from: $ResolvedPath" -ForegroundColor Yellow
-
-$RuleFile = Join-Path $ResolvedPath ".agents\rules\persian-rtl.md"
-if (Test-Path $RuleFile) {
-    Remove-Item $RuleFile -Force
-    Write-Host "[-] Removed: $RuleFile" -ForegroundColor Green
+foreach ($target in $CssTargets) {
+    $bak = $target + ".bak"
+    if (Test-Path $bak) {
+        Copy-Item -Path $bak -Destination $target -Force
+        Write-Host "[✓] Restored: $target" -ForegroundColor Green
+    }
 }
 
-Write-Host "[✓] Uninstalled Antigravity RTL rules." -ForegroundColor Green
+Write-Host "Uninstallation completed. Please reload Antigravity IDE." -ForegroundColor Green

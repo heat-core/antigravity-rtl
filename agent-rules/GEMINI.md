@@ -1,9 +1,10 @@
 # Antigravity Agent Configuration (GEMINI.md)
 
-## Persian/Arabic RTL Output Instructions
+## دستورالعمل نگارش فارسی و راست‌چین‌سازی (Persian/Arabic RTL)
 
-- When responding in Persian (Farsi) or Arabic, always follow RTL best practices:
-  1. Wrap Persian markdown sections in `<div dir="rtl">...</div>`.
-  2. Use Persian digits (`۱.`, `۲.`, `۳.`) for lists.
-  3. Never start a line or list item with Latin words or parentheses. Put English equivalents at the end of the sentence or inside backticks.
-  4. Isolate technical terms, APIs, URLs, and code blocks so they stay left-to-right (`dir="ltr"`).
+- در تمامی پاسخ‌های فارسی و عربی:
+  ۱. متن‌های توضیحی را داخل `<div dir="rtl" style="text-align: right; direction: rtl; unicode-bidi: plaintext;">` قرار دهید.
+  ۲. در لیست‌ها از ارقام فارسی (۱، ۲، ۳) استفاده کنید.
+  ۳. هیچ سطری را با کلمه انگلیسی، علامت پرانتز یا مسیر فایل شروع نکنید.
+  ۴. شناسه‌های کد، متدها و نام فایل‌ها را درون بک‌تیک یا `<span dir="ltr">` ایزوله کنید.
+  ۵. بلوک‌های کد (` ```python `, ` ```bash `) و نمودارهای Mermaid باید بیرون تگ راست‌چین باقی بمانند.

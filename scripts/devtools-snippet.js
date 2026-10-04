@@ -5,8 +5,6 @@
  * 2. Press Ctrl + Shift + I (or Help -> Toggle Developer Tools).
  * 3. Go to the "Console" tab.
  * 4. Paste this code and press Enter.
- *
- * Tip: You can save this in DevTools -> Sources -> Snippets for 1-click execution.
  */
 
 (function applyAntigravityRTL() {
@@ -15,7 +13,7 @@
 
   if (existing) {
     existing.remove();
-    console.log('%c[Antigravity RTL] RTL styles toggled OFF.', 'color: #ff9800; font-weight: bold;');
+    console.log('%c[Antigravity RTL] استایل‌های راست‌چین خاموش شدند.', 'color: #ff9800; font-weight: bold;');
     return;
   }
 
@@ -60,23 +58,18 @@
       text-align: right !important;
     }
 
-    pre, pre code, code, .monaco-editor, .terminal, .xterm, [class*="code-block"], svg, .mermaid {
+    pre, code, [class*="code-block"], .monaco-editor {
       direction: ltr !important;
       text-align: left !important;
-      unicode-bidi: isolate !important;
-    }
-
-    p code, li code {
-      direction: ltr !important;
-      unicode-bidi: embed !important;
-      display: inline-block;
+      unicode-bidi: normal !important;
     }
   `;
 
   const styleEl = document.createElement('style');
   styleEl.id = STYLE_ID;
-  styleEl.innerHTML = css;
+  styleEl.type = 'text/css';
+  styleEl.appendChild(document.createTextNode(css));
   document.head.appendChild(styleEl);
 
-  console.log('%c[Antigravity RTL] RTL styles successfully applied! %c✓', 'color: #4caf50; font-weight: bold;', 'color: #4caf50; font-size: 14px;');
+  console.log('%c[Antigravity RTL] ✅ استایل‌های راست‌چین هوشمند با فونت وزیرمتن با موفقیت فعال شدند!', 'color: #10b981; font-weight: bold; font-size: 13px;');
 })();

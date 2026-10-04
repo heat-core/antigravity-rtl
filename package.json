@@ -1,14 +1,15 @@
 {
   "name": "antigravity-rtl",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Complete Right-to-Left (RTL) and Persian/Arabic support suite for Google Antigravity IDE",
   "main": "scripts/devtools-snippet.js",
   "scripts": {
+    "install-permanent": "python scripts/install-permanent.py",
     "test": "echo \"Ready for Antigravity IDE\" && exit 0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/antigravity-rtl.git"
+    "url": "git+https://github.com/heat-core/antigravity-rtl.git"
   },
   "keywords": [
     "antigravity",
@@ -22,6 +23,6 @@
     "vazirmatn",
     "css"
   ],
-  "author": "Antigravity RTL Contributors",
+  "author": "Farbod Jolani (heat-core)",
   "license": "MIT"
 }
