@@ -85,30 +85,6 @@ antigravity-rtl/
 └── README.md                      # This documentation
 ```
 
----
-
-## 🚀 How to Push to GitHub
-
-To push this repository to your GitHub account:
-
-```bash
-# 1. Navigate to the repository folder
-cd C:\Users\Dororo\antigravity\rtl
-
-# 2. Initialize Git
-git init
-
-# 3. Add all files and make initial commit
-git add .
-git commit -m "feat: initial commit for antigravity-rtl package"
-
-# 4. Link your remote GitHub repository
-git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/antigravity-rtl.git
-git branch -M main
-
-# 5. Push to GitHub
-git push -u origin main
-```
 
 ---
 
