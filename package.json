@@ -1,0 +1,27 @@
+{
+  "name": "antigravity-rtl",
+  "version": "1.0.0",
+  "description": "Complete Right-to-Left (RTL) and Persian/Arabic support suite for Google Antigravity IDE",
+  "main": "scripts/devtools-snippet.js",
+  "scripts": {
+    "test": "echo \"Ready for Antigravity IDE\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/antigravity-rtl.git"
+  },
+  "keywords": [
+    "antigravity",
+    "antigravity-ide",
+    "gemini",
+    "rtl",
+    "farsi",
+    "persian",
+    "arabic",
+    "bidi",
+    "vazirmatn",
+    "css"
+  ],
+  "author": "Antigravity RTL Contributors",
+  "license": "MIT"
+}

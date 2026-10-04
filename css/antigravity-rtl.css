@@ -1,0 +1,122 @@
+/**
+ * Antigravity RTL - CSS Stylesheet for Google Antigravity IDE
+ * Author: Antigravity Community
+ * License: MIT
+ * Description: Fixes Bidirectional (BiDi) text rendering, punctuation flipping,
+ *              and mixed English/Persian/Arabic alignment in Antigravity IDE.
+ */
+
+/* Import modern Vazirmatn font for crisp Persian typography */
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+
+:root {
+  --ag-rtl-font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --ag-code-font-family: 'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace;
+}
+
+/* ==========================================================================
+   Chat, Scratchpad, and Markdown Text Blocks (RTL Fix)
+   ========================================================================== */
+
+/* Target markdown containers, messages, chat bubbles, and scratchpad content */
+[class*="chat-message"],
+[class*="scratchpad"],
+[class*="rendered-markdown"],
+.monaco-workbench .part.sidebar .chat-container,
+div[data-testid*="chat"],
+.markdown-body {
+  font-family: var(--ag-rtl-font-family);
+}
+
+/* BiDi auto detection & right-to-left for text elements */
+[class*="rendered-markdown"] p,
+[class*="rendered-markdown"] li,
+[class*="rendered-markdown"] h1,
+[class*="rendered-markdown"] h2,
+[class*="rendered-markdown"] h3,
+[class*="rendered-markdown"] h4,
+[class*="rendered-markdown"] h5,
+[class*="rendered-markdown"] h6,
+[class*="rendered-markdown"] blockquote,
+[class*="message-body"] p,
+[class*="message-body"] li,
+.chat-message-content p,
+.chat-message-content li {
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: plaintext;
+  line-height: 1.8;
+  letter-spacing: -0.01em;
+}
+
+/* Ensure ordered and unordered lists display bullets & numbers on the correct side */
+[class*="rendered-markdown"] ul,
+[class*="rendered-markdown"] ol,
+.chat-message-content ul,
+.chat-message-content ol {
+  padding-right: 1.5rem !important;
+  padding-left: 0.5rem !important;
+  margin-right: 0 !important;
+  direction: rtl;
+  text-align: right;
+}
+
+/* ==========================================================================
+   Strict LTR Preservation for Code, Terminal, Pre, and Technical Elements
+   ========================================================================== */
+
+/* Code blocks, snippets, preformatted text must ALWAYS remain LTR */
+pre,
+pre code,
+code,
+.monaco-editor,
+.monaco-editor-preview,
+.terminal,
+.xterm,
+[class*="code-block"],
+[class*="codeblock"],
+[class*="monaco-tokenized-source"],
+svg,
+.mermaid {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  font-family: var(--ag-code-font-family) !important;
+}
+
+/* Inline code tags inside Persian sentences: isolate direction */
+p code,
+li code,
+blockquote code {
+  direction: ltr !important;
+  display: inline-block;
+  unicode-bidi: embed !important;
+  padding: 0.15em 0.4em;
+  margin: 0 0.2em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Tables alignment: header and body cells support auto bidi */
+table {
+  direction: rtl;
+  margin: 1rem 0;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: right;
+  unicode-bidi: plaintext;
+  padding: 8px 12px;
+}
+
+/* Tables containing code columns stay LTR */
+td pre, td code {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Links inside RTL paragraphs */
+a {
+  unicode-bidi: isolate;
+}
